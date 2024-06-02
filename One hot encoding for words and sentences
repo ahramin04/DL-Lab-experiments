@@ -1,0 +1,22 @@
+# One hot encoding
+import numpy as np
+text = "hello"
+char_to_int = {char: i for i, char in enumerate(set(text))}
+int_to_char = {i: char for char, i in char_to_int.items()}
+char_indices = [char_to_int[char] for char in text]
+one_hot_encoded = np.zeros((len(text), len(char_to_int)))
+for i, index in enumerate(char_indices):
+    one_hot_encoded[i, index] = 1
+print(one_hot_encoded)
+# for words
+
+from sklearn.preprocessing import OneHotEncoder
+words = ['vitw', 'college', 'srk', 'jntuk', 'good']
+word_to_int = {word: i for i, word in enumerate(set(words))}
+int_to_word = {i: word for word, i in word_to_int.items()}
+word_indices = [word_to_int[word] for word in words]
+word_indices = [[index] for index in word_indices]
+encoder = OneHotEncoder(sparse=False)
+one_hot_encoded = encoder.fit_transform(word_indices)
+print(one_hot_encoded)
+
